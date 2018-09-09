@@ -4,9 +4,9 @@
 
 import cherrypy
 import recipe
+import json_tool
 
 LAN_IP = '192.168.0.193'
-
 
 
 class HelloWorld(object):
@@ -19,14 +19,16 @@ class HelloWorld(object):
 
     index.exposed = True
 
-    def recipe_to_html(self, recipe_to_convert):
-        title = recipe_to_convert.title
+    def recipe_to_html(self, rec):
+        title = rec.title
         html = f"<h1>{title}</h1><br>\n"
-        html += f"Placeholder text"
+        html += f"{rec.servings} port | {rec.time} min"
         return html
 
 RECIPES = []
 REC = recipe.Recipe("Pasta med tonfisksås och sojabönor", 4, 15)
+
+json_tool.recipe_to_json_file(REC)
 
 RECIPES.append(REC)
 
