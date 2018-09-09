@@ -15,6 +15,7 @@ class Recipe:
         self.servings = servings
         self.time = time
         self.description = description
+        self.tags = []
         self.steps = []
         self.ingredients = []
 
@@ -30,3 +31,6 @@ class Recipe:
             return
         self.ingredients.append(Ingredient(ingredient_name, amount, unit))
 
+    def add_tag(self, tag):
+        ''' Add tag to recipe, used for searching '''
+        self.tags.append(tag)
