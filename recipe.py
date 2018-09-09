@@ -10,9 +10,9 @@ UNITS = ["st", "g", "ml", "dl", "port"]
 
 class Recipe:
     ''' Holds a recipe '''
-    def __init__(self, title, portions=None, time=None, description=None):
+    def __init__(self, title, servings=None, time=None, description=None):
         self.title = title
-        self.portions = portions
+        self.servings = servings
         self.time = time
         self.description = description
         self.steps = []
