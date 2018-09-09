@@ -15,18 +15,38 @@ class HelloWorld(object):
         self.recipes = recipes
     def index(self):
         ''' Index path'''
-        return self.recipe_to_html(self.recipes[0])
+        return self._recipe_to_html(self.recipes[0])
 
     index.exposed = True
 
-    def recipe_to_html(self, rec):
+    def _recipe_to_html(self, rec):
         title = rec.title
         html = f"<h1>{title}</h1><br>\n"
-        html += f"{rec.servings} port | {rec.time} min"
+        html += f"<b>{rec.servings} port | {rec.time} min</b><br>"
+        html += self._ingredients_to_table(rec.ingredients)
         return html
+
+    def _ingredients_to_table(self, ingredients):
+        table = r"<table><tr><td>Ingredienser</td></tr>"
+        for ing in ingredients:
+            text = ing.name
+            if ing.amount:
+                text += f", {ing.amount}"
+                if ing.unit:
+                    text += f"{ing.unit}"
+            table += f"<tr><td>{text}</td></tr>"
+        return table + r"</table>"
+
 
 RECIPES = []
 REC = recipe.Recipe("Pasta med tonfisksås och sojabönor", 4, 15)
+REC.add_ingredient("pasta", 4, "port")
+REC.add_ingredient("tonfisk i burk", 2, "st")
+REC.add_ingredient("sojabönor", 250, "g")
+REC.add_ingredient("tomatpesto", 1, "dl")
+REC.add_ingredient("matlagningsgrädde", 2.5, "dl")
+REC.add_ingredient("ruccola", 75, "g")
+REC.add_ingredient("salt och peppar")
 
 json_tool.recipe_to_json_file(REC)
 
