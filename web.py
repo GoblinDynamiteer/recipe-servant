@@ -9,7 +9,7 @@ import json_tool
 LAN_IP = '192.168.0.193'
 
 
-class HelloWorld(object):
+class RecipeWeb(object):
     ''' CherryPy HelloWorld '''
     def __init__(self, recipes):
         self.recipes = recipes
@@ -53,4 +53,4 @@ json_tool.recipe_to_json_file(REC)
 RECIPES.append(REC)
 
 cherrypy.config.update({'server.socket_host': LAN_IP})
-cherrypy.quickstart(HelloWorld(RECIPES))
+cherrypy.quickstart(RecipeWeb(RECIPES))
